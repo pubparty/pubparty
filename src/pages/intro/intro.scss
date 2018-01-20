@@ -1,0 +1,54 @@
+page-intro {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../assets/images/bg-splash.jpg);
+    text-align: center;
+  }
+  ion-navbar {
+    position: absolute;
+    top: -14vh;
+  }
+  ion-slides {
+    position: absolute;
+    bottom: 4vh;
+    left: 15vw;
+    margin-left: auto;
+    margin-right: auto;
+    height: 44vh;
+    width: 70vw;
+    ion-slide {
+      p {
+        position: absolute;
+        top: 0;
+        text-align: left;
+        width: 70vw;
+        font-size: 90%;
+        color: color($colors, light);
+      }
+    }
+  }
+  ion-content {
+    div.welcome {
+      margin-top: 10vh;
+      p, h1 {
+        font-weight: bold;
+        color: color($colors, light);
+      }
+      h1 {
+        font-size: 175%;
+      }
+      img {
+        margin-top: 4vh;
+        width: 48vw;
+      }
+    }
+  }
+  .swiper-pagination-bullet-active {
+    background: color($colors, light) !important;
+  }
+  .swiper-pagination-bullet {
+    background: color($colors, primary);
+    opacity: 1;
+  }
+}

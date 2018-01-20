@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="navCtrl.pop()">Back</button>
+    </ion-buttons>
+    <ion-title>Update Event</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="done()" [disabled]="!eventForm.valid || (!images || !images.length >= 1) || !location">Done</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-slides no-padding no-margin pager="true">
+    <ion-slide *ngFor="let image of images">
+      <div class="overlay-image">
+        <img-loader src="{{ image }}"></img-loader>
+      </div>
+    </ion-slide>
+    <ion-slide tappable (click)="addPhoto()">
+      <div class="overlay-image">
+        <img-loader src="assets/images/image.png"></img-loader>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <p *ngIf="images && images.length == 0">An event must have atleast 1 photo.</p>
+  <form [formGroup]="eventForm" (keydown)="keyDownFunction($event)" padding>
+    <ion-list no-margin no-padding>
+      <ion-item no-lines>
+        <ion-input type="text" formControlName="title" placeholder="Name of event"></ion-input>
+      </ion-item>
+      <p *ngIf="eventForm.controls.title.hasError('required') && eventForm.controls.title.touched">Please enter title of the event.</p>
+      <ion-item>
+        <ion-textarea placeholder="What you'll do..." rows="4" formControlName="description"></ion-textarea>
+      </ion-item>
+      <p *ngIf="eventForm.controls.description.hasError('required') && eventForm.controls.description.touched">Please describe what you'll do.</p>
+      <ion-item>
+        <ion-textarea placeholder="Your party rules..." rows="4" formControlName="rules"></ion-textarea>
+      </ion-item>
+      <p *ngIf="eventForm.controls.rules.hasError('required') && eventForm.controls.rules.touched">Please specify your party rules.</p>
+      <ion-item no-lines>
+        <ion-datetime displayFormat="MMMM DD, YYYY @ hh:mm A" formControlName="date" pickerFormat="MMM DD YY hh mm A" placeholder="Date of the event" no-padding></ion-datetime>
+      </ion-item>
+      <button class="location" ion-button full (click)="setLocation()">Set Location</button>
+      <p *ngIf="!location">An event must have a location.</p>
+      <img-loader *ngIf="location" class="map" src="{{ getLocationImage() }}"></img-loader>
+      <ion-item style="margin-top: 0.8rem;">
+        <ion-textarea placeholder="How to get there..." rows="4" formControlName="direction"></ion-textarea>
+      </ion-item>
+      <p *ngIf="eventForm.controls.direction.hasError('required') && eventForm.controls.direction.touched">Please specify direction to the location.</p>
+      <ion-item>
+        <ion-textarea placeholder="Additional notes" rows="4" formControlName="notes"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

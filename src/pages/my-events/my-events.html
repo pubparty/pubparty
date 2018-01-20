@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Your Parties</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showFavorites()">
+        <ion-icon name="star"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row text-center class="buttons">
+    <ion-col col-6 tappable (click)="mode = 0">
+      <b>Going</b>
+    </ion-col>
+    <ion-col col-6 tappable (click)="mode = 1">
+      <b>Manage</b>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="mode == 0">
+    <ion-list *ngIf="user && (user.eventInvites || user.eventRequests)" style="margin: 0;">
+      <ion-item tappable (click)="showRequests()">
+        <ion-badge item-end color="danger" *ngIf="user.eventInvites">{{user.eventInvites.length}}</ion-badge>
+        <ion-avatar item-start>
+          <img-loader *ngIf="user.eventInvites" src="{{eventsApi.getEvent(user.eventInvites[user.eventInvites.length - 1]).images[0]}}"></img-loader>
+          <img-loader *ngIf="!user.eventInvites && user.eventRequests" src="{{eventsApi.getEvent(user.eventRequests[user.eventRequests.length - 1]).images[0]}}"></img-loader>
+        </ion-avatar>
+        <h2 style="color: #0093D1"><b>Party Requests</b></h2>
+        <h3 *ngIf="user.eventInvites">Accept or cancel pending requests</h3>
+        <h3 *ngIf="!user.eventInvites && user.eventRequests">Cancel pending party requests</h3>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="events && (events | attendedEvents: [-1, '']).length == 0" text-center padding-bottom class="empty">
+      <ion-icon name="md-sad" no-margin no-padding></ion-icon>
+      <h5 no-margin no-padding><b>No Events</b></h5>
+      <p no-margin no-padding>You're not going to any events.</p>
+      <button ion-button color="dark" margin-top margin-bottom round (click)="changeTab()">Browse Events</button>
+    </div>
+    <event *ngFor="let event of events | attendedEvents: [-1, '']; trackBy: itemTrackBy" [data]="event"></event>
+  </div>
+  <div *ngIf="mode == 1">
+    <div *ngIf="events && (events | hostedEvents: [-1, '']).length == 0" text-center margin-top padding-top padding-bottom class="empty">
+      <ion-icon name="md-sad" no-margin no-padding></ion-icon>
+      <h5 no-margin no-padding><b>No Hosted Events</b></h5>
+      <p no-margin no-padding>You've not hosted any events yet.</p>
+      <button ion-button color="dark" margin-top margin-bottom round (click)="app.getRootNav().push('AddEventPage')">Host Event</button>
+    </div>
+    <event *ngFor="let event of events | hostedEvents: [-1, '']; trackBy: itemTrackBy" [data]="event"></event>
+  </div>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="app.getRootNav().push('AddEventPage')"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

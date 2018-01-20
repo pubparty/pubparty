@@ -1,0 +1,5 @@
+<ion-tabs #tabs color="primary">
+  <ion-tab [root]="tab1Root" tabIcon="md-apps"></ion-tab>
+  <ion-tab [root]="tab2Root" tabIcon="md-beer" tabBadgeStyle="danger" tabBadge="{{notification.getUnread()}}"></ion-tab>
+  <ion-tab [root]="tab3Root" tabIcon="md-contact"></ion-tab>
+</ion-tabs>

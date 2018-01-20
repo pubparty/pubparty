@@ -1,0 +1,54 @@
+page-complete-profile {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../assets/images/bg-splash.jpg);
+    text-align: center;
+  }
+  ion-navbar {
+    position: absolute;
+    top: -14vh;
+  }
+  img {
+    border-radius: 12px;
+    width: 6em;
+    height: 6em;
+  }
+
+  img.selected,
+  img:active {
+    opacity: 0.6;
+  }
+
+  button {
+    width: 70vw;
+    border-radius: 8px !important;
+  }
+
+  form {
+    margin-top: 8vh !important;
+
+    h4,
+    p {
+      color: color($colors, light);
+    }
+
+    p {
+      width: 70vw;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      font-size: 100%;
+      text-align: left;
+    }
+  }
+
+  ion-item {
+    background: rgba(255, 255, 255, 0.8) !important;
+    width: 70vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.8rem !important;
+    color: color($colors, primary) !important;
+  }
+}

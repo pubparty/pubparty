@@ -1,0 +1,20 @@
+<ion-card tappable (click)="app.getRootNav().push('EventPage', { eventId: event.eventId })">
+  <div class="overlay-image">
+    <img-loader src="{{ event.images[0] }}"></img-loader>
+  </div>
+  <div class="event-info">
+    <img-loader *ngIf="usersApi.getUser(event.hostId)" src="{{ usersApi.getUser(event.hostId).profilePic }}"></img-loader>
+    <h3><b>{{ event.title }}</b></h3>
+    <p>{{ event.location.title }}</p>
+    <div *ngIf="isInvited() && !isPending()">
+      <p style="margin-top: 1vh; margin-bottom: 1vh;">You are invited to this event.</p>
+      <button ion-button (click)="acceptRequest(); $event.stopPropagation();" style="background: #F46E6A; color: #fff !important;">I'll be there!</button>
+      <button ion-button (click)="rejectRequest(); $event.stopPropagation();" style="background: #FAD549; color: #fff !important;">Not interested</button>
+    </div>
+    <div *ngIf="isPending() && !isInvited()">
+      <p style="margin-top: 1vh; margin-bottom: 1vh;">Your request is pending.</p>
+      <button ion-button (click)="cancelRequest(); $event.stopPropagation();" style="background: #0093D1; color: #fff !important;">Cancel Request</button>
+    </div>
+  </div>
+  <div class="event-date">Happening {{ event.date | fromNowFormat }}</div>
+</ion-card>

@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">Back</button>
+    </ion-buttons>
+    <ion-title>Party Requests</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content *ngIf="user">
+  <event-request *ngFor="let eventId of user.eventInvites; trackBy: itemTrackBy" [data]="eventsApi.getEvent(eventId)"></event-request>
+  <event-request *ngFor="let eventId of user.eventRequests; trackBy: itemTrackBy" [data]="eventsApi.getEvent(eventId)"></event-request>
+</ion-content>

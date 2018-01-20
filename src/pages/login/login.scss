@@ -1,0 +1,41 @@
+page-login {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../assets/images/bg-splash.jpg);
+    text-align: center;
+  }
+  ion-navbar {
+    position: absolute;
+    top: -14vh;
+  }
+  ion-content {
+    div.welcome {
+      margin-top: 10vh;
+      p, h1 {
+        font-weight: bold;
+        color: color($colors, light);
+      }
+      h1 {
+        font-size: 175%;
+      }
+      img {
+        margin-top: 4vh;
+        width: 48vw;
+      }
+    }
+    div.bottom {
+      width: 70vw;
+      left: 15vw;
+      position: absolute;
+      bottom: 4vh;
+      color: color($colors, light);
+      p:first-child {
+        font-size: 110%;
+      }
+      p:last-child {
+        font-size: 90%;
+      }
+    }
+  }
+}

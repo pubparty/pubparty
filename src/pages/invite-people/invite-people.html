@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">Back</button>
+    </ion-buttons>
+    <ion-title>Invite People</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Search for name or username" [(ngModel)]="searchUser"></ion-searchbar>
+  <div *ngIf="users && (users | usersFilter: [null, excludedIds]).length == 0" text-center margin-top padding-top padding-bottom class="empty">
+    <ion-icon name="md-sad" no-margin no-padding></ion-icon>
+    <h5 no-margin no-padding><b>No User</b></h5>
+    <p no-margin no-padding>There are no available users that can be invited to this event.</p>
+  </div>
+  <ion-list *ngIf="users">
+    <ion-item tappable (click)="viewProfile(user.userId)" *ngFor="let user of users | usersFilter: [searchUser, excludedIds]">
+      <ion-avatar item-start>
+        <div class="avatar">
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+      <ion-icon name="checkmark-circle" item-end color="primary" *ngIf="getStatus(user.userId) == 0" tappable (click)="acceptRequest(user.userId); $event.stopPropagation();" margin-right></ion-icon>
+      <ion-icon name="close-circle" item-end color="danger" *ngIf="getStatus(user.userId) == 0" tappable (click)="rejectRequest(user.userId); $event.stopPropagation();"></ion-icon>
+      <ion-icon name="md-add-circle" item-end color="primary" *ngIf="getStatus(user.userId) == 1" tappable (click)="sendRequest(user.userId); $event.stopPropagation();" margin-right></ion-icon>
+      <ion-icon name="md-remove-circle" item-end color="danger" *ngIf="getStatus(user.userId) == 2" tappable (click)="cancelRequest(user.userId); $event.stopPropagation();" margin-right></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,13 @@
+<ion-content class="no-scroll">
+  <div text-center>
+    <img src="assets/images/logo.png"/>
+    <p>{{ 'THANK_YOU_REGISTERING' | translate }}</p>
+    <p *ngIf="emailSent">{{ 'EMAIL_CONFIRMATION_SENT' | translate }} <span *ngIf="user">{{user.email}}</span></p>
+    <p *ngIf="!emailSent">{{ 'EMAIL_CONFIRMATION_SENT_ONCE_ONLINE' | translate }}</p>
+    <p>{{ 'ONCE_VERIFIED' | translate }}</p>
+    <button ion-button icon-left color="robust" [disabled]="!network.online()" (click)="sendEmailVerification()">
+      <ion-icon name="md-mail"></ion-icon>
+      {{ 'RESEND_VERIFICATION' | translate }}
+    </button>
+  </div>
+</ion-content>

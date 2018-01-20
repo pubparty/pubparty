@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">Back</button>
+    </ion-buttons>
+    <ion-title>Party Requests</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="invite()"><ion-icon name="md-add"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="event && !event.userRequests && !event.userInvites" text-center margin-top padding-top padding-bottom class="empty">
+    <ion-icon name="md-sad" no-margin no-padding></ion-icon>
+    <h5 no-margin no-padding><b>No Party Requests</b></h5>
+    <p no-margin no-padding>There are no pending party requests.</p>
+    <button ion-button color="dark" margin-top margin-bottom round (click)="invite()">Invite People</button>
+  </div>
+  <ion-list *ngIf="event && event.userRequests && event.userRequests.length > 0">
+    <ion-list-header>
+      <b>REQUESTS</b>
+    </ion-list-header>
+    <ion-item tappable (click)="viewProfile(userId)" *ngFor="let userId of event.userRequests">
+      <ion-avatar item-start>
+        <div class="avatar">
+          <img-loader src="{{usersApi.getUser(userId).profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{usersApi.getUser(userId).firstName}} {{usersApi.getUser(userId).lastName}}</b></h2>
+      <h3>requests to join this party</h3>
+      <ion-icon name="checkmark-circle" item-end color="primary" tappable (click)="acceptRequest(userId); $event.stopPropagation();" margin-right></ion-icon>
+      <ion-icon name="close-circle" item-end color="danger" tappable (click)="rejectRequest(userId); $event.stopPropagation();"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <!-- Sent -->
+  <ion-list *ngIf="event && event.userInvites && event.userInvites.length > 0">
+    <ion-list-header>
+      <b>SENT</b>
+    </ion-list-header>
+    <ion-item tappable (click)="viewProfile(userId)" *ngFor="let userId of event.userInvites">
+      <ion-avatar item-start>
+        <div class="avatar">
+          <img-loader src="{{usersApi.getUser(userId).profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{usersApi.getUser(userId).firstName}} {{usersApi.getUser(userId).lastName}}</b></h2>
+      <h3>party request sent</h3>
+      <ion-icon name="remove-circle" item-end color="danger" tappable (click)="cancelRequest(userId); $event.stopPropagation();"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

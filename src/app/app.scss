@@ -1,0 +1,126 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.scroll-content {
+  background-image: url('../assets/images/background.png');
+  background-position: initial initial;
+  background-repeat: initial initial;
+}
+
+.no-scroll .scroll-content {
+  overflow: hidden;
+}
+
+.img-loaded + ion-spinner {
+  display: none;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+div.empty {
+  ion-icon {
+    font-size: 300%;
+  }
+
+  h5 {
+    font-size: 150%;
+  }
+
+  p {
+    width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@-webkit-keyframes animateLaunchIn {
+  0% {
+    transform: translate3d(0,300%,0);
+  }
+
+  100% {
+    transform: translate3d(0,0,0);
+  }
+}
+
+.animateLaunchIn {
+  animation: animateLaunchIn;
+  animation-timing-function: ease-in-out;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+@-webkit-keyframes animateUpDown {
+  0% {
+    transform: translate3d(0,-20%,0);
+  }
+
+  50% {
+    transform: translate3d(0,20%,0);
+  }
+
+  100% {
+    transform: translate3d(0,-20%,0);
+  }
+}
+
+.animateUpDown {
+  animation: animateUpDown;
+  animation-timing-function: ease-in-out;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@-webkit-keyframes animateFadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animateFadeInOut {
+  animation: animateFadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+}
+@-webkit-keyframes animateClockwise {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animateClockwise {
+  animation: animateClockwise;
+  animation-timing-function: ease-in-out;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}

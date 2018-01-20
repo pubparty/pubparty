@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">Back</button>
+    </ion-buttons>
+    <ion-title>Your Favorites</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="events && (events | favoriteEvents).length == 0" text-center margin-top padding-top padding-bottom class="empty">
+    <ion-icon name="md-sad" no-margin no-padding></ion-icon>
+    <h5 no-margin no-padding><b>No Favorites</b></h5>
+    <p no-margin no-padding>You have not added any event to your favorites yet.</p>
+  </div>
+  <event *ngFor="let event of events | favoriteEvents ; trackBy: itemTrackBy" [data]="event"></event>
+</ion-content>

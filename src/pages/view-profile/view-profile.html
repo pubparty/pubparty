@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-fab top right *ngIf="user">
+    <button ion-fab mini color="dark" (click)="navCtrl.pop()"><ion-icon name="md-close"></ion-icon></button>
+  </ion-fab>
+  <div class="profile" *ngIf="user" text-center>
+    <div class="avatar center">
+      <img-loader src="{{user.profilePic}}" (click)="viewPhoto(user.profilePic)"></img-loader>
+    </div>
+    <br>
+    <h5 no-margin no-padding><b>{{user.firstName}} {{user.lastName}}</b></h5>
+    <h6 no-margin no-padding margin-bottom>@{{user.userName}}</h6>
+    <button ion-button round color="secondary" margin-bottom (click)="contact()">Contact</button>
+    <p no-margin no-padding class="about">
+      {{user.about}}
+    </p>
+    <div *ngIf="events && (events | userAttended: [-1, '', user.userId]).length > 0">
+      <button ion-button round color="sandy" margin-bottom margin-top>Going</button>
+      <div class="events" text-center margin-top>
+        <div *ngFor="let event of events | userAttended: [3, '', user.userId]; trackBy: itemTrackBy">
+          <img-loader src="{{eventsApi.getEvent(event.eventId).images[0]}}" tappable (click)="viewEvent(event.eventId)"></img-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

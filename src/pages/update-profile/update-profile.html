@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="profileForm" (keydown)="keyDownFunction($event)" *ngIf="user">
+    <img-loader src="{{user.profilePic}}" tappable (click)="setProfilePic()"></img-loader>
+    <ion-list no-margin no-padding margin-top>
+      <ion-item no-lines>
+        <ion-input type="text" formControlName="userName" placeholder="{{ 'CREATE_USERNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-input type="text" formControlName="firstName" placeholder="{{ 'YOUR_FIRST_NAME' | translate }}"></ion-input>
+      </ion-item>
+      <p *ngIf="profileForm.controls.firstName.hasError('required') && profileForm.controls.firstName.touched">{{ 'PLEASE_ENTER_FIRST_NAME' | translate }}</p>
+      <p *ngIf="!profileForm.controls.firstName.valid && !profileForm.controls.firstName.hasError('required') && profileForm.controls.firstName.touched">{{ 'PLEASE_ENTER_FIRST_NAME' | translate }}</p>
+      <ion-item no-lines>
+        <ion-input type="text" formControlName="lastName" placeholder="{{ 'YOUR_LAST_NAME' | translate }}"></ion-input>
+      </ion-item>
+      <p *ngIf="profileForm.controls.lastName.hasError('required') && profileForm.controls.lastName.touched">{{ 'PLEASE_ENTER_LAST_NAME' | translate }}</p>
+      <p *ngIf="!profileForm.controls.lastName.valid && !profileForm.controls.lastName.hasError('required') && profileForm.controls.lastName.touched">{{ 'PLEASE_ENTER_LAST_NAME' | translate }}</p>
+      <ion-item no-lines>
+        <ion-input type="email" formControlName="email" placeholder="{{ 'YOUR_EMAIL' | translate }}"></ion-input>
+      </ion-item>
+      <p *ngIf="profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">{{ 'PLEASE_ENTER_EMAIL' | translate }}</p>
+      <p *ngIf="!profileForm.controls.email.valid && !profileForm.controls.email.hasError('required') && profileForm.controls.email.touched">{{ 'PLEASE_ENTER_VALID_EMAIL' | translate }}</p>
+      <ion-item no-lines>
+        <ion-input type="number" formControlName="number" placeholder="{{ 'YOUR_CONTACT_NUMBER' | translate }}"></ion-input>
+      </ion-item>
+      <p *ngIf="(profileForm.controls.number.hasError('required') || profileForm.controls.number.hasError('pattern')) && profileForm.controls.number.touched">{{ 'PLEASE_ENTER_VALID_NUMBER' | translate }}<br>{{ 'FORMAT' | translate }} XXXXXXXXXX</p>
+      <ion-item no-lines>
+        <ion-textarea placeholder="{{ 'TELL_US_ABOUT_YOURSELF' | translate }}" rows="4" formControlName="about"></ion-textarea>
+      </ion-item>
+      <p *ngIf="profileForm.controls.about.hasError('required') && profileForm.controls.about.touched">{{ 'PLEASE_TELL_US_ABOUT_YOURSELF' | translate }}</p>
+      <button ion-button color="primary" (click)="updateProfile()" no-margin no-padding margin-top [disabled]="!profileForm.valid">{{ 'UPDATE_PROFILE' | translate }}</button>
+    </ion-list>
+  </form>
+</ion-content>

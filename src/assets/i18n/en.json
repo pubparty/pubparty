@@ -1,0 +1,62 @@
+{
+  "auth/email-already-in-use": "This email is already in use.",
+  "auth/invalid-email": "You have entered an invalid email.",
+  "auth/operation-not-allowed": "This service is currently disabled right now.",
+  "auth/weak-password": "You have entered a weak password.",
+  "auth/wrong-password": "You have entered an incorrect password.",
+  "auth/user-not-found": "Account not found. Please check your account.",
+  "auth/user-disabled": "You have been banned from the service. Contact support.",
+  "auth/account-exists-with-different-credential": "An account with the same credential already exists.",
+  "auth/invalid-credential": "Login credential has expired. Please try again later.",
+
+  "WELCOME_TO": "Welcome to",
+  "INTRO_1A": "is the hottest app right now for people who know how to have fun!",
+  "INTRO_1B": "The fun never ends because all of the hottest parties nearby is accessible to you anytime, anywhere!",
+  "INTRO_2A": "Get invited to the hottest parties in your city or even discover new parties!",
+  "INTRO_2B": "Once your request has been accepted you can start partying right away! How convenient!",
+  "INTRO_3": "So, what are you waiting for? Discover the hottest parties now!",
+
+  "DISCOVER": "DISCOVER",
+  "JOIN_NOW": "JOIN NOW",
+
+  "BY_CONTINUING": "By continuing, make sure you agree to our",
+  "TERMS": "terms",
+  "AND": "and",
+  "PRIVACY_POLICY": "privacy policy.",
+
+  "LOGIN_FACEBOOK_ERROR": "Sorry, an error occured logging you in with Facebook.",
+  "LOGIN_GOOGLE_ERROR": "Sorry, an error occured logging you in with Google.",
+  "LOGIN_TWITTER_ERROR": "Login failed. No Twitter account is found on this device.",
+
+  "CONTINUE_WITH_FACEBOOK": "Continue with Facebook",
+  "CONTINUE_WITH_GOOGLE": "Continue with Google",
+
+  "CREATE_USERNAME": "Create username",
+  "PLEASE_ENTER_USERNAME": "Please enter your username.",
+  "USERNAME_INVALID": "Username must only contain characters and numbers and should be 4-20 characters long.",
+  "USERNAME_TAKEN": "Username is already taken.",
+
+  "YOUR_FIRST_NAME": "Your first name",
+  "PLEASE_ENTER_FIRST_NAME": "Please enter your first name.",
+  "YOUR_LAST_NAME": "Your last name",
+  "PLEASE_ENTER_LAST_NAME": "Please enter your last name.",
+  "YOUR_EMAIL": "Your email address",
+  "PLEASE_ENTER_EMAIL": "Please enter your email.",
+  "PLEASE_ENTER_VALID_EMAIL": "Please enter a valid email.",
+  "YOUR_CONTACT_NUMBER": "Your contact number",
+  "PLEASE_ENTER_VALID_NUMBER": "Please enter a valid phone number.",
+  "FORMAT": "Format:",
+  "TELL_US_ABOUT_YOURSELF": "Tell us about yourself ...",
+  "PLEASE_TELL_US_ABOUT_YOURSELF": "Please tell us about yourself.",
+  "TELL_US_MEET_PEOPLE": "Tell us about yourself so you can start partying with fun and awesome people right away...",
+  "COMPLETE_PROFILE": "Complete Profile",
+
+  "PROFILE": "PROFILE",
+  "UPDATE_PROFILE": "Update Profile",
+  "SIGNOUT": "Signout",
+  "CONFIRM_LOGOUT": "Confirm Logout",
+  "CONFIRM_LOGOUT_MESSAGE": "Are you sure you want to logout?",
+  "CANCEL": "Cancel",
+  "LOGOUT": "Logout",
+  "PROFILE_UPDATED_MESSAGE": "Your profile has been successfully updated."
+}

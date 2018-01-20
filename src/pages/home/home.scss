@@ -1,0 +1,25 @@
+page-home {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../assets/images/bg.png");
+  }
+
+  ion-row.buttons {
+    ion-col {
+      padding-top: 2vh;
+      padding-bottom: 2vh;
+      font-size: 115%;
+    }
+
+    ion-col:first-child {
+      background: color($colors, secondary);
+      color: color($colors, light);
+    }
+
+    ion-col:last-child {
+      background: color($colors, sandy);
+      color: color($colors, light);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content class="no-scroll">
+  <div class="welcome">
+    <p no-margin no-padding>{{ 'WELCOME_TO' | translate }}</p>
+    <h1 no-margin no-padding><b>PUBPARTY</b></h1>
+    <img src="assets/images/logo.png" no-margin no-padding/>
+  </div>
+  <div class="bottom">
+    <p text-left margin-bottom padding-bottom><b>PubParty</b> {{ 'INTRO_1A' | translate }}</p>
+    <div padding-left padding-right>
+      <button ion-button block margin-bottom color="facebook" (click)="loginFacebook()">{{ 'CONTINUE_WITH_FACEBOOK' | translate }}</button>
+      <button ion-button block color="google" (click)="loginGoogle()">{{ 'CONTINUE_WITH_GOOGLE' | translate }}</button>
+    </div>
+    <p text-center margin-top padding-top>{{ 'BY_CONTINUING' | translate }} <b>{{ 'TERMS' | translate }}</b> {{ 'AND' | translate }}<b> {{ 'PRIVACY_POLICY' | translate }}</b></p>
+  </div>
+</ion-content>

@@ -1,0 +1,51 @@
+page-set-map {
+  .scroll {
+    height: 100%;
+  }
+  div.search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    div.results {
+      p {
+        background: color($colors, light);
+        color: color($colors, dark);
+        margin-left: auto;
+        margin-right: auto;
+        width: 94vw;
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        font-size: 70%;
+        padding: 0.9rem;
+        padding-left: 1.5rem;
+        border-bottom: solid 0.1px #dadada;
+        border-top: solid 0.1px #dadada;
+        b {
+          color: color($colors, primary);
+        }
+      }
+
+      p:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      p:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      p.activated, p:active {
+        opacity: 1;
+      }
+    }
+  }
+  #map {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

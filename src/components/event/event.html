@@ -1,0 +1,22 @@
+<ion-card tappable (click)="app.getRootNav().push('EventPage', { eventId: event.eventId })">
+  <div class="overlay-image">
+    <img-loader src="{{ event.images[0] }}"></img-loader>
+  </div>
+  <div class="event-info">
+    <img-loader *ngIf="usersApi.getUser(event.hostId)" src="{{ usersApi.getUser(event.hostId).profilePic }}"></img-loader>
+    <!-- (click)="viewProfile(event.hostId); $event.stopPropagation();" -->
+    <h3><b>{{ event.title }}</b></h3>
+    <p>{{ event.location.title }}</p>
+    <span>{{ event.participants.length }} people are going.</span>
+  </div>
+  <div class="event-date">Happening {{ event.date | fromNowFormat }}</div>
+  <div class="favorite" *ngIf="usersApi.getCurrentUser().favorites && usersApi.getCurrentUser().favorites.indexOf(event.eventId) > -1" tappable (click)="removeFromFavorites(event.eventId); $event.stopPropagation();">
+    <ion-icon name="star"></ion-icon>
+  </div>
+  <div class="favorite" *ngIf="!usersApi.getCurrentUser().favorites || usersApi.getCurrentUser().favorites.indexOf(event.eventId) == -1" tappable (click)="addToFavorites(event.eventId); $event.stopPropagation();">
+    <ion-icon name="star-outline"></ion-icon>
+  </div>
+  <div class="badge" *ngIf="event.userRequests && usersApi.getCurrentUser().userId == event.hostId">
+    <ion-badge item-end color="danger">{{ event.userRequests.length }}</ion-badge>
+  </div>
+</ion-card>

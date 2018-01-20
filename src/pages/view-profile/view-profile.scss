@@ -1,0 +1,55 @@
+page-view-profile {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../assets/images/bg.png");
+  }
+  div.profile {
+    margin-top: 12vh;
+    img {
+      border-radius: 0.75em;
+      width: 6em;
+      height: 6em;
+    }
+    h6 {
+      color: color($colors, dark);
+    }
+    h5 {
+      color: color($colors, primary);
+    }
+    button {
+      width: 50vw;
+    }
+    p.about {
+      width: 75vw;
+      margin-left: auto;
+      margin-right: auto;
+      color: color($colors, secondary);
+    }
+  }
+  div.events {
+      div {
+        display: inline;
+        position: relative;
+        span {
+          position: absolute;
+          bottom: 10px;
+          right: 18px;
+          font-size: 150%;
+          color: color($colors, light);
+        }
+        img {
+          width: 6em;
+          height: 6em;
+          margin-left: 2.5vw;
+          margin-right: 2.5vw;
+          margin-bottom: 1vh;
+          border-radius: 0.75em;
+          object-fit: cover !important;
+        }
+      }
+      button {
+        color: color($colors, secondary);
+      }
+    }
+}

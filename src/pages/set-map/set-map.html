@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="navCtrl.pop()">
+        Back
+      </button>
+    </ion-buttons>
+    <ion-title>Set Location</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="done()" [disabled]="!location">
+        Done
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="search">
+    <ion-searchbar placeholder="Search for place" [(ngModel)]="searchPlace" (ngModelChange)="queryChanged($event)"></ion-searchbar>
+    <div class="results" *ngIf="searchResults && searchResults.length > 0 && query != ''">
+      <p *ngFor="let result of searchResults" no-margin no-padding text-left tappable (click)="setQuery(result)"><b>{{result.structured_formatting.main_text}}</b> {{result.structured_formatting.secondary_text}}</p>
+    </div>
+  </div>
+  <div #map id="map"></div>
+</ion-content>

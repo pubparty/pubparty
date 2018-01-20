@@ -1,0 +1,109 @@
+<ion-header *ngIf="event">
+  <ion-navbar hideBackButton="true" color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="back()">Back</button>
+    </ion-buttons>
+    <ion-title>{{ event.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content *ngIf="event">
+  <ion-slides no-padding no-margin pager="true" *ngIf="event">
+    <div class="event-date">Happening {{ event.date | fromNowFormat }}</div>
+    <div class="favorite" *ngIf="usersApi.getCurrentUser().favorites && usersApi.getCurrentUser().favorites.indexOf(event.eventId) > -1" tappable (click)="removeFromFavorites(event.eventId); $event.stopPropagation();">
+      <ion-icon name="star"></ion-icon>
+    </div>
+    <div class="favorite" *ngIf="!usersApi.getCurrentUser().favorites || usersApi.getCurrentUser().favorites.indexOf(event.eventId) == -1" tappable (click)="addToFavorites(event.eventId); $event.stopPropagation();">
+      <ion-icon name="star-outline"></ion-icon>
+    </div>
+    <div class="event-info">
+      <span>{{ event.participants.length }} people are going.</span>
+      <h3 no-margin><b>{{ event.title }}</b></h3>
+    </div>
+    <ion-slide *ngFor="let image of event.images">
+      <div class="overlay-image">
+        <img-loader src="{{ image }}"></img-loader>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <div padding>
+    <ion-row class="host">
+      <ion-col col-10 *ngIf="!isHost">
+        <h5 no-padding no-margin><b>Meet the host, {{ usersApi.getUser(event.hostId).firstName }}</b></h5>
+        <p no-padding no-margin>Message</p>
+      </ion-col>
+      <ion-col col-10 *ngIf="isHost">
+        <h5 no-padding no-margin><b>Thanks for hosting, {{ usersApi.getUser(event.hostId).firstName }}</b></h5>
+      </ion-col>
+      <ion-col col-2>
+        <img-loader src="{{ usersApi.getUser(event.hostId).profilePic }}" tappable (click)="viewProfile(event.hostId); $event.stopPropagation();"></img-loader>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="!isHost">
+      {{ usersApi.getUser(event.hostId).about }}
+      </ion-col>
+      <ion-col *ngIf="isHost">
+        Thank you making <b>PubParty</b> more awesome than it already is. The party won't be the same without fun and awesome hosts just like you! <b>xoxo</b>
+      </ion-col>
+    </ion-row>
+    <ion-list *ngIf="isHost">
+      <ion-list-header>
+        <b>MANAGE</b>
+      </ion-list-header>
+      <button ion-item (click)="updateEvent()">
+        Update Details
+      </button>
+      <button ion-item (click)="manageRequests()">
+        Manage Requests
+        <ion-badge item-end *ngIf="event && event.userRequests" color="danger">{{ event.userRequests.length }}</ion-badge>
+      </button>
+    </ion-list>
+    <span class="divider"></span>
+    <div>
+      <h5 no-padding no-margin margin-top><b>What we'll do</b></h5>
+      <p no-padding no-margin style="margin-top: 1.5vh;">{{ event.description }}</p>
+    </div>
+    <span class="divider"></span>
+    <div>
+      <h5 no-padding no-margin margin-top><b>Party Rules</b></h5>
+      <p no-padding no-margin style="margin-top: 1.5vh;">{{ event.rules }}</p>
+    </div>
+    <span class="divider"></span>
+    <div *ngIf="event.notes">
+      <h5 no-padding no-margin margin-top><b>Notes</b></h5>
+      <p no-padding no-margin style="margin-top: 1.5vh;">{{ event.notes }}</p>
+    </div>
+    <span class="divider" *ngIf="event.notes"></span>
+    <div>
+      <h5 no-padding no-margin margin-top><b>See you there!</b></h5>
+      <p no-padding no-margin style="margin-top: 1.5vh;">Happening {{ event.date | fromNowFormat }}</p>
+      <p no-padding no-margin style="margin-top: 1.5vh;">{{ event.direction }}</p>
+    </div>
+  </div>
+  <img-loader class="map" src="{{ getLocationImage() }}" tappable (click)="navCtrl.push('ViewMapPage', { location: event.location })"></img-loader>
+  <div padding>
+    <div>
+      <h5 no-padding no-margin margin-top><b>Invites</b></h5>
+      <p no-padding no-margin style="margin-top: 1.5vh;">This event is open for more participants.</p>
+      <div text-center *ngIf="!isHost && !isGoing && !isInvited && (!event.userRequests || (event.userRequests && event.userRequests.indexOf(usersApi.getCurrentUser().userId) == -1))">
+        <p><b>You may request to join this event</b></p>
+        <button ion-button (click)="sendRequest()">Request to Join</button>
+      </div>
+      <div text-center *ngIf="!isHost && !isGoing && !isInvited && (event.userRequests && event.userRequests.indexOf(usersApi.getCurrentUser().userId) > -1)">
+        <p><b>You may cancel your request to join</b></p>
+        <button ion-button (click)="cancelRequest()" style="background: #F46E6A">Cancel Request</button>
+      </div>
+      <div text-center *ngIf="!isHost && !isGoing && isInvited">
+        <p><b>You are invited to this event</b></p>
+        <button ion-button (click)="acceptRequest()" style="background: #F46E6A">I'll be there!</button>
+        <button ion-button (click)="rejectRequest()" style="background: #FAD549">Not interested</button>
+      </div>
+      <div text-center *ngIf="isHost">
+        <p><b>You are hosting this event</b></p>
+      </div>
+      <div text-center *ngIf="isGoing">
+        <p><b>You are going to this event</b></p>
+      </div>
+    </div>
+  </div>
+</ion-content>

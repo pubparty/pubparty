@@ -1,0 +1,11 @@
+{
+  "name": "Jetpack",
+  "app_id": "412e081c",
+  "type": "ionic-angular",
+  "gcm_key": "249584835712",
+  "dev_push": false,
+  "sender_id": "249584835712",
+  "integrations": {
+    "cordova": {}
+  }
+}

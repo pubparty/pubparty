@@ -1,0 +1,26 @@
+page-profile {
+  .scroll-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../assets/images/bg.png);
+  }
+  div.profile {
+    margin-top: 12vh;
+    img {
+      border-radius: 0.75em;
+      width: 6em;
+      height: 6em;
+    }
+    h5 {
+      color: color($colors, primary);
+    }
+  }
+  ion-list-header {
+    color: color($colors, secondary) !important;
+  }
+  ion-list {
+    button {
+      color: color($colors, secondary) !important;
+    }
+  }
+}

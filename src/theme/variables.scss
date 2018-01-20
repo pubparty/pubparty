@@ -1,0 +1,123 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+$font-path: "../assets/fonts";
+
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #0093D1,
+  secondary:  #F46E6A,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  sandy: (
+    base: #FAD549,
+    contrast: #fff
+  ),
+  coral:      #F5774D,
+  skyblue:    #589ADE,
+  robust:     #F35B67,
+  steel:      #638694,
+  facebook:   #3B5998,
+  google:     #DB4437
+);
+
+@font-face {
+  font-family: "Avant Garde";
+  src: url("../assets/fonts/avantgarde.otf") format("truetype");
+}
+@font-face {
+  font-family: "Avant Garde Bold";
+  src: url("../assets/fonts/avantgardebold.otf") format("truetype");
+}
+$font-family-base: "Avant Garde", sans-serif !default;
+
+b {
+  font-family: "Avant Garde Bold" !important;
+}
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+$loading-ios-background: #fff;
+$loading-ios-spinner-color: color($colors, robust);
+$alert-ios-button-text-color: color($colors, robust);
+$action-sheet-ios-title-font-size: 1.4rem;
+$action-sheet-ios-button-text-color: color($colors, robust);
+$action-sheet-ios-button-destructive-text-color: color($colors, skyblue);
+$toolbar-ios-title-text-color: #fff;
+$toolbar-ios-button-color: #fff;
+$toolbar-ios-background: color($colors, robust);
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+$loading-md-background: #fff;
+$loading-md-spinner-color: color($colors, robust);
+$alert-md-button-text-color: color($colors, robust);
+$action-sheet-md-title-font-size: 1.4rem;
+$action-sheet-md-button-text-color: color($colors, robust);
+$action-sheet-md-button-destructive-text-color: color($colors, skyblue);
+$toolbar-md-title-text-color: #fff;
+$toolbar-md-button-color: #fff;
+$toolbar-md-background: color($colors, robust);
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+$loading-wp-background: #fff;
+$loading-wp-spinner-color: color($colors, robust);
+$alert-wp-button-text-color: color($colors, robust);
+$action-sheet-wp-title-font-size: 1.4rem;
+$action-sheet-wp-button-text-color: color($colors, robust);
+$action-sheet-wp-button-destructive-text-color: color($colors, skyblue);
+$toolbar-wp-title-text-color: #fff;
+$toolbar-wp-button-color: #fff;
+$toolbar-wp-background: color($colors, robust);
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";

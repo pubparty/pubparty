@@ -1,0 +1,20 @@
+<ion-content>
+  <!-- Avatar -->
+  <div class="profile" *ngIf="user" text-center>
+    <img-loader src="{{user.profilePic}}"></img-loader>
+    <h5 no-margin no-padding margin-top><b>{{user.firstName}} {{user.lastName}}</b></h5>
+    <h6 no-margin no-padding margin-bottom>@{{user.userName}}</h6>
+  </div>
+  <!-- Menu -->
+  <ion-list *ngIf="user">
+    <ion-list-header>
+      <b>{{ 'PROFILE' | translate }}</b>
+    </ion-list-header>
+    <button ion-item (click)="showUpdateProfile()">
+      {{ 'UPDATE_PROFILE' | translate }}
+    </button>
+    <button ion-item (click)="logout()">
+      {{ 'SIGNOUT' | translate }}
+    </button>
+  </ion-list>
+</ion-content>
