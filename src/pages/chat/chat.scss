@@ -44,7 +44,7 @@ page-chat {
         height: 14px;
         border-radius: 100%;
         border: solid 2px color($colors, light);
-        background: color($colors, gray);
+        background: color($colors, light);
       }
       span.active {
         background: color($colors, primary) !important;
