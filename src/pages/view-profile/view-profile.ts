@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { DatabaseProvider, EventsApi } from '../../providers';
+import { DatabaseMessageProvider, EventsApi } from '../../providers';
 import * as firebase from 'firebase';
 import { User, Event } from '../../models';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,7 +19,7 @@ export class ViewProfilePage {
   private events: Event[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private eventsApi: EventsApi,
-    private database: DatabaseProvider,
+    private database: DatabaseMessageProvider,
     private viewCtrl: ViewController,
     private photoViewer: PhotoViewer,
     private sms: SMS) {

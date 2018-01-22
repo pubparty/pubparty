@@ -1,0 +1,24 @@
+page-conversations {
+  h2 {
+    color: color($colors, secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 42vw;
+  }
+  div {
+    span {
+      color: color($colors, primary);
+      font-size: 70%;
+    }
+  }
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60vw;
+  }
+  button {
+    span {
+      color: color($colors, light);
+    }
+  }
+}

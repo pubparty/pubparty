@@ -8,6 +8,10 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+
+import { Badge } from '@ionic-native/badge';
+
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { File } from '@ionic-native/file';
@@ -31,12 +35,19 @@ import {
   AlertProvider,
   AnimationProvider,
   AuthProvider,
+  AuthMessageProvider,
   DatabaseProvider,
   LoadingProvider,
   NetworkProvider,
+  NetworkMessageProvider,
+  GroupsApi,
+  DatabaseMessageProvider,
   NotificationProvider,
+  NotificationMessageProvider,
   ToastProvider,
+  StorageMessageProvider,
   StorageProvider,
+  ConversationsApi,
   TranslateProvider,
   UsersApi,
   EventsApi
@@ -76,17 +87,24 @@ export function createTranslateLoader(http: Http) {
   providers: [
     //Providers
     AuthProvider,
+    AuthMessageProvider,
     NetworkProvider,
     NotificationProvider,
+    NotificationMessageProvider,
     ToastProvider,
     AnimationProvider,
     LoadingProvider,
     AlertProvider,
+    ConversationsApi,
     DatabaseProvider,
+    DatabaseMessageProvider,
+    NetworkMessageProvider,
     StorageProvider,
+    StorageMessageProvider,
     TranslateProvider,
     UsersApi,
     EventsApi,
+    GroupsApi,
     //Native
     StatusBar,
     SplashScreen,
@@ -94,6 +112,7 @@ export function createTranslateLoader(http: Http) {
     Network,
     Facebook,
     GooglePlus,
+    TwitterConnect,
     Camera,
     Geolocation,
     File,
@@ -101,6 +120,7 @@ export function createTranslateLoader(http: Http) {
     FCM,
     PhotoViewer,
     SMS,
+    Badge,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

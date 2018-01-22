@@ -1,0 +1,48 @@
+page-messages {
+  div.empty-list {
+    margin-top: 18vh;
+    ion-icon {
+      font-size: 500%;
+    }
+    p {
+      width: 50vw;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h3 {
+      width: 100vw;
+    }
+    button {
+      span {
+        font-size: 100%;
+      }
+    }
+  }
+  ion-list-header {
+    span {
+      color: color($colors, secondary);
+      float: right;
+      font-size: 100%;
+    }
+  }
+  h2 {
+    color: color($colors, secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 42vw;
+  }
+  span {
+    color: color($colors, primary);
+    font-size: 70%;
+  }
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60vw;
+  }
+  button {
+    span {
+      color: color($colors, light);
+    }
+  }
+}

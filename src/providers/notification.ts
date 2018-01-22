@@ -15,6 +15,7 @@ import { Subject } from 'rxjs/Subject';
 export class NotificationProvider {
   public subscription: Subject<any>;
   private unreadCount: number;
+  public requestsReceived: number = 0;
   constructor(private platform: Platform,
     private fcm: FCM,
     private database: DatabaseProvider,

@@ -48,6 +48,6 @@
     <event *ngFor="let event of events | hostedEvents: [-1, '']; trackBy: itemTrackBy" [data]="event"></event>
   </div>
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="app.getRootNav().push('AddEventPage')"><ion-icon name="md-add"></ion-icon></button>
+    <button ion-fab color="secondary" (click)="app.getRootNav().push('AddEventPage')"><ion-icon name="md-add"></ion-icon></button>
   </ion-fab>
 </ion-content>

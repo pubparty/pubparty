@@ -7,6 +7,11 @@ import { AttendedEventsPipe } from './attended-events';
 import { HostedEventsPipe } from './hosted-events';
 import { FavoriteEventsPipe } from './favorite-events';
 import { UserAttendedPipe } from './user-attended';
+import { DatePipe } from './date';
+import { RecentConversationsPipe } from './recent-conversations';
+import { RecentGroupsPipe } from './recent-groups';
+import { LimitMessagesPipe } from './limit-messages';
+import { LimitPipe } from './limit';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { UserAttendedPipe } from './user-attended';
     AttendedEventsPipe,
     HostedEventsPipe,
     FavoriteEventsPipe,
-    UserAttendedPipe
+    UserAttendedPipe,
+    DatePipe,
+    RecentConversationsPipe,
+    RecentGroupsPipe,
+    LimitMessagesPipe,
+    LimitPipe
   ],
   imports: [
 
@@ -30,7 +40,12 @@ import { UserAttendedPipe } from './user-attended';
     AttendedEventsPipe,
     HostedEventsPipe,
     FavoriteEventsPipe,
-    UserAttendedPipe
+    UserAttendedPipe,
+    DatePipe,
+    RecentConversationsPipe,
+    RecentGroupsPipe,
+    LimitMessagesPipe,
+    LimitPipe
   ]
 })
 export class PipesModule { }

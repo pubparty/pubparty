@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AuthConfig } from '../../configs/auth-config';
-import { AuthProvider, DatabaseProvider, EventsApi, UsersApi, NotificationProvider } from '../../providers';
+import { AuthProvider, DatabaseProvider, EventsApi, UsersApi, NotificationMessageProvider } from '../../providers';
 import * as firebase from 'firebase';
 
 @IonicPage()
@@ -18,7 +18,7 @@ export class LoaderPage {
     private eventsApi: EventsApi,
     private usersApi: UsersApi,
     private zone: NgZone,
-    private notification: NotificationProvider) {
+    private notification: NotificationMessageProvider) {
   }
 
   ionViewDidLoad() {

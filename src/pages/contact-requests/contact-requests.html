@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title>{{ 'CONTACT_REQUESTS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Received -->
+  <ion-list *ngIf="received && received.length > 0">
+    <ion-list-header>
+      <b>{{ 'RECEIVED' | translate }}</b>
+    </ion-list-header>
+    <ion-item tappable (click)="viewProfile(user)" *ngFor="let user of received">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+      <ion-icon name="checkmark-circle" item-end color="primary" tappable (click)="acceptRequest(user); $event.stopPropagation();" *ngIf="network.online()"></ion-icon>
+      <ion-icon name="close-circle" item-end color="danger" tappable (click)="rejectRequest(user); $event.stopPropagation();" *ngIf="network.online()"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <!-- Sent -->
+  <ion-list *ngIf="sent && sent.length > 0">
+    <ion-list-header>
+      <b>{{ 'SENT' | translate }}</b>
+    </ion-list-header>
+    <ion-item tappable (click)="viewProfile(user)" *ngFor="let user of sent">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+      <ion-icon name="remove-circle" item-end color="danger" tappable (click)="cancelRequest(user); $event.stopPropagation();" *ngIf="network.online()"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

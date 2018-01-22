@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar  color="primary">
+    <ion-title>{{ 'YOUR_CONTACTS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Contact Requests -->
+  <ion-list *ngIf="user && (user.requestsSent || user.requestsReceived)">
+    <ion-item tappable (click)="showRequests()">
+      <ion-badge item-end color="danger" *ngIf="user.requestsReceived">{{user.requestsReceived.length}}</ion-badge>
+      <ion-avatar item-start>
+        <img-loader *ngIf="user.requestsReceived" src="{{usersApi.getUser(user.requestsReceived[user.requestsReceived.length - 1]).profilePic}}"></img-loader>
+        <img-loader *ngIf="!user.requestsReceived && user.requestsSent" src="{{usersApi.getUser(user.requestsSent[user.requestsSent.length - 1]).profilePic}}"></img-loader>
+      </ion-avatar>
+      <h2><b>{{ 'CONTACT_REQUESTS' | translate }}</b></h2>
+      <h3 *ngIf="user.requestsReceived">{{ 'APPROVE_IGNORE_REQUESTS' | translate }}</h3>
+      <h3 *ngIf="!user.requestsReceived && user.requestsSent">{{ 'CANCEL_PENDING_REQUESTS' | translate }}</h3>
+    </ion-item>
+  </ion-list>
+  <!-- Contacts -->
+  <ion-list *ngIf="contacts">
+    <ion-list-header>
+      <b>{{ 'CONTACTS' | translate }}</b>
+    </ion-list-header>
+    <ion-searchbar [(ngModel)]="searchUser" placeholder="{{ 'SEARCH' | translate }}"></ion-searchbar>
+    <ion-item tappable (click)="viewProfile(user)" *ngFor="let user of contacts | usersFilter: [[], searchUser]">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+      <ion-icon name="md-chatboxes" item-end color="primary" tappable (click)="sendMessage(user.userId); $event.stopPropagation();" *ngIf="network.online()"></ion-icon>
+    </ion-item>
+    <p text-center *ngIf="user.contacts && ((contacts | usersFilter:[[], searchUser])?.length < 1)">{{ 'NO_USERS_FOUND' | translate }}</p>
+    <div *ngIf="!user.contacts" text-center>
+      <p>{{ 'NO_CONTACTS' | translate }}</p>
+      <button ion-button round color="secondary" (click)="showAddContact()" [disabled]="!network.online()">{{ 'ADD_CONTACT' | translate }}</button>
+    </div>
+  </ion-list>
+  <!-- Button -->
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="showAddContact()" [disabled]="!network.online()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

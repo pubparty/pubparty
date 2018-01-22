@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title>{{ 'YOUR_CONVERSATIONS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="conversations && conversations.length > 0">
+    <ion-searchbar [(ngModel)]="searchConversation" placeholder="{{ 'SEARCH' | translate }}"></ion-searchbar>
+    <ion-item *ngFor="let conversation of conversations | recentConversations: [conversations.length, searchConversation]" tappable (click)="viewConversation(conversation)">
+      <ion-avatar item-start>
+        <div class="avatar">
+          <span [ngClass]="{'active': usersApi.getUser(conversation.partnerId).online}"></span>
+          <img-loader src="{{usersApi.getUser(conversation.partnerId).profilePic}}" *ngIf="usersApi.getUser(conversation.partnerId)"></img-loader>
+        </div>
+      </ion-avatar>
+      <!-- Has unread messages -->
+      <div *ngIf="getUnreadMessages(conversation) > 0">
+        <h2 *ngIf="usersApi.getUser(conversation.partnerId)" float-left><b>{{usersApi.getUser(conversation.partnerId).firstName}} {{usersApi.getUser(conversation.partnerId).lastName}}</b></h2>
+        <span float-right no-margin no-padding><b>{{conversation.messages[conversation.messages.length - 1].date | dateFormat}}</b></span>
+        <h3 float-left><b>{{getLastMessage(conversation)}}</b></h3>
+        <ion-badge color="danger" float-right *ngIf="getUnreadMessages(conversation) > 0">{{getUnreadMessages(conversation)}}</ion-badge>
+      </div>
+      <!-- Has no unread messages -->
+      <div *ngIf="getUnreadMessages(conversation) == 0">
+        <h2 *ngIf="usersApi.getUser(conversation.partnerId)" float-left>{{usersApi.getUser(conversation.partnerId).firstName}} {{usersApi.getUser(conversation.partnerId).lastName}}</h2>
+        <span float-right no-margin no-padding>{{conversation.messages[conversation.messages.length - 1].date | dateFormat}}</span>
+        <h3 float-left>{{getLastMessage(conversation)}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+  <!-- Button -->
+  <ion-fab right bottom *ngIf="user && user.contacts">
+    <button ion-fab color="secondary" (click)="showCompose()" [disabled]="!network.online()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

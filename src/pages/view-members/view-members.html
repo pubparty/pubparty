@@ -1,0 +1,32 @@
+<ion-header color="primary">
+  <ion-navbar hideBackButton="true">
+    <ion-buttons>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title *ngIf="group">{{group.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="currentUser && group">
+    <ion-searchbar [(ngModel)]="searchUser"></ion-searchbar>
+    <ion-item tappable (click)="viewProfile(user)" *ngFor="let user of users | usersFilter: [[], searchUser]">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+
+      <ion-icon name="add-circle" item-end color="primary" *ngIf="getStatus(user.userId) == 0 && network.online()" tappable (click)="sendRequest(user); $event.stopPropagation();"></ion-icon>
+
+      <ion-icon name="checkmark-circle" item-end color="primary" *ngIf="getStatus(user.userId) == 2 && network.online()" tappable (click)="acceptRequest(user); $event.stopPropagation();"></ion-icon>
+      <ion-icon name="close-circle" item-end color="danger" *ngIf="getStatus(user.userId) == 2 && network.online()" tappable (click)="rejectRequest(user); $event.stopPropagation();"></ion-icon>
+
+      <ion-icon name="remove-circle" item-end color="danger" *ngIf="getStatus(user.userId) == 1 && network.online()" tappable (click)="cancelRequest(user); $event.stopPropagation();"></ion-icon>
+    </ion-item>
+
+    <p text-center *ngIf="((users | usersFilter:[[], searchUser])?.length < 1)">{{ 'NO_USERS_FOUND' | translate }}</p>
+  </ion-list>
+</ion-content>

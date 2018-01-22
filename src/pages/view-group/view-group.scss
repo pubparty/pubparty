@@ -1,0 +1,46 @@
+page-view-group {
+  div.group {
+    img {
+      width: 100vw;
+      max-height: 36vh;
+    }
+    h5 {
+      color: color($colors, secondary);
+      margin-bottom: 0.5vh;
+      span {
+        color: color($colors, dark);
+        margin-left: 1.5vw;
+        font-size: 110%;
+      }
+    }
+    div.members {
+      div {
+        display: inline;
+        position: relative;
+        span {
+          position: absolute;
+          bottom: 10px;
+          right: 18px;
+          font-size: 150%;
+          color: color($colors, light);
+        }
+        img {
+          width: 4.5em;
+          height: 4.5em;
+          margin-left: 2.5vw;
+          margin-right: 2.5vw;
+          margin-bottom: 1vh;
+          border-radius: 0.75em;
+        }
+      }
+      button {
+        color: color($colors, secondary);
+      }
+    }
+    div {
+      button {
+        width: 42vw;
+      }
+    }
+  }
+}

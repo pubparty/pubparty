@@ -1,0 +1,25 @@
+<ion-header color="primary">
+  <ion-navbar hideBackButton="true">
+    <ion-buttons>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title *ngIf="otherUser">{{ 'CONTACTS_OF' | translate }} {{otherUser.firstName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngIf="currentUser && otherUser">
+    <ion-searchbar [(ngModel)]="searchUser"></ion-searchbar>
+    <ion-item tappable (click)="viewProfile(user)" *ngFor="let user of users | usersFilter: [[], searchUser]">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+    </ion-item>
+
+    <p text-center *ngIf="((users | usersFilter:[[], searchUser])?.length < 1)">{{ 'NO_USERS_FOUND' | translate }}</p>
+  </ion-list>
+</ion-content>

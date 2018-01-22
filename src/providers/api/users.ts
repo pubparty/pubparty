@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { User } from '../../models';
-import { LoadingProvider, DatabaseProvider, NetworkProvider } from '../../providers';
+import { LoadingProvider, DatabaseProvider, DatabaseMessageProvider, NetworkProvider } from '../../providers';
 import * as firebase from 'firebase';
 import { Subject } from 'rxjs/Subject';
+import { ConversationsApi } from './conversations';
+import { GroupsApi } from './groups';
+
 
 @Injectable()
 export class UsersApi {
@@ -19,7 +22,13 @@ export class UsersApi {
 
   public usersSubscription: Subject<User[]> = new Subject<User[]>();
 
-  constructor(private database: DatabaseProvider, private network: NetworkProvider, private loading: LoadingProvider) {
+  constructor(
+    private conversationsApi: ConversationsApi,
+    private groupsApi: GroupsApi,
+    private database: DatabaseProvider, 
+    private databaseMessage: DatabaseMessageProvider, 
+    private network: NetworkProvider, 
+    private loading: LoadingProvider) {
     console.log("Initializing UsersAPI");
     this.networkSubscription = this.network.subscription.subscribe((connected: boolean) => {
       if (connected && !this.loaded) {
@@ -59,7 +68,24 @@ export class UsersApi {
             });
             this.subscriptionMap.set(userId, subscription);
           }
+           //Subscribe to current user's conversations and groups.
+           if (userId == firebase.auth().currentUser.uid) {
+            let user = this.users[i];
+            if (user.conversations) {
+              let userIds = Object.keys(user.conversations);
+              for (let i = 0; i < userIds.length; i++) {
+                this.conversationsApi.subscribeToConversation(user.conversations[userIds[i]].conversationId);
+              }
+            }
+            if (user.groups) {
+              let groupIds = Object.keys(user.groups);
+              for (let i = 0; i < groupIds.length; i++) {
+                this.groupsApi.subscribeToGroup(groupIds[i]);
+              }
+            }
+          }
         }
+        
         this.loaded = true;
         this.loading.hide();
         resolve();

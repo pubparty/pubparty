@@ -1,0 +1,32 @@
+<ion-content>
+  <ion-fab top right *ngIf="user && group">
+    <button ion-fab mini color="dark" (click)="back()"><ion-icon name="md-close"></ion-icon></button>
+  </ion-fab>
+  <ion-fab top left *ngIf="user && group">
+    <button ion-fab mini color="dark" (click)="setGroupPic()"><ion-icon name="hammer"></ion-icon></button>
+  </ion-fab>
+  <div class="group" *ngIf="user && group" text-center>
+    <img-loader src="{{group.image}}" fallback="assets/images/group.png" (click)="viewPhoto(group.image)"></img-loader>
+    <h5 no-margin no-padding margin-top><b>{{group.name}}</b><span tappable (click)="setName()"><ion-icon name="hammer"></ion-icon></span></h5>
+    <h6 no-margin no-padding margin-bottom>{{ 'STARTED' | translate }} {{group.messages[0].date | dateFormat}}</h6>
+    <button ion-button small color="quaternary" margin-bottom margin-top (click)="viewAll()" *ngIf="group.members && group.members.length > 1"><b>{{group.members.length}} {{ 'MEMBERS' | translate }}</b></button>
+    <button ion-button small color="quaternary" margin-bottom margin-top (click)="viewAll()" *ngIf="group.members && group.members.length == 1"><b>{{group.members.length}} {{ 'MEMBER' | translate }}</b></button>
+    <div class="members" text-center margin-top>
+      <!-- Show upto 8 members of the group (randomly chosen) -->
+      <div *ngFor="let member of group.members | limit: 8">
+        <span *ngIf="member == user.userId"><ion-icon name="md-happy"></ion-icon></span>
+        <img-loader src="{{usersApi.getUser(member).profilePic}}" tappable (click)="viewProfile(member)"></img-loader>
+      </div>
+      <br>
+      <!-- Show more button if there are more than 8 members in the group. -->
+      <button ion-button block clear small color="primary" no-margin no-padding *ngIf="group.members && group.members.length > 8" (click)="viewAll()"><b text-uppercase>{{ 'MORE' | translate }}</b></button>
+    </div>
+    <div margin-top padding-top>
+      <!-- Add user's contacts to the group, only show if there are contacts that are not yet member of the group. -->
+      <button ion-button round color="secondary" (click)="addMembers()" [disabled]="!network.online()" *ngIf="!contactsInGroup()">{{ 'ADD_MEMBERS' | translate }}</button>
+      <br>
+      <button ion-button round color="primary" (click)="leaveGroup()" [disabled]="!network.online()" *ngIf="group.members && group.members.length > 1">{{ 'LEAVE_GROUP' | translate }}</button>
+      <button ion-button round color="primary" (click)="deleteGroup()" [disabled]="!network.online()" *ngIf="group.members && group.members.length == 1">{{ 'DELETE_GROUP' | translate }}</button>
+    </div>
+  </div>
+</ion-content>

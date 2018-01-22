@@ -1,0 +1,114 @@
+page-chat {
+  .scroll-content {
+    border-top: 0 !important;
+  }
+  ion-content {
+    background-image: url('../assets/images/background.png');
+    background-position: initial initial;
+    background-repeat: initial initial;
+    ion-spinner {
+      margin-top: 2.5vh;
+    }
+    ion-col {
+      p {
+        display: inline-block;
+        max-width: 75vw;
+        background: color($colors, dark);
+        color: color($colors, light);
+        padding: 0.65em;
+        border-radius: 0.5em;
+      }
+
+      ion-badge {
+        font-weight: normal;
+        padding-top: 1vh;
+        font-size: 85%;
+        background: transparent !important;
+        color: color($colors, dark) !important;
+      }
+    }
+
+    ion-col.avatar {
+      position: relative;
+      img {
+        width: 12vw;
+        height: 12vw;
+        border-radius: 100%;
+        margin-top: 1.5vh;
+      }
+      span {
+        position: absolute;
+        top: 13vw;
+        right: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
+        border: solid 2px color($colors, light);
+        background: color($colors, gray);
+      }
+      span.active {
+        background: color($colors, primary) !important;
+      }
+    }
+
+    ion-col.message {
+      img {
+        background: color($colors, dark);
+        border-radius: 0.5em;
+      }
+    }
+
+    ion-col.message.right {
+      img {
+        background: color($colors, secondary);
+      }
+    }
+
+    ion-col.right {
+      p {
+        background: color($colors, secondary);
+        color: color($colors, light);
+      }
+      div.float-break {
+        clear: both; float: left; display: block; position: relative;
+      }
+      ion-badge {
+        background: transparent !important;
+        color: color($colors, secondary) !important;
+        span {
+          margin-left: 1vw;
+          font-weight: bold;
+          color: color($colors, dark);
+        }
+      }
+    }
+  }
+
+  ion-footer {
+    div.bubble {
+      span {
+        color: color($colors, light);
+        background: color($colors, dark);
+        float: center;
+        padding: 0.65em;
+        border-radius: 0.75em;
+      }
+    }
+    border-top: solid 1px rgba(0, 0, 0, 0.05);
+    background: color($colors, light);
+
+    ion-col {
+      display: inline-flex;
+      align-items: center;
+
+      ion-icon {
+        font-size: 225%;
+        color: color($colors, dark);
+      }
+
+      ion-input {
+        font-size: 110%;
+      }
+    }
+  }
+}

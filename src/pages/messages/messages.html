@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{ 'YOUR_MESSAGES' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Indicator when user has no contacts yet. -->
+  <div class="empty-list" *ngIf="user && !user.contacts" text-center>
+    <ion-icon name="md-sad"></ion-icon>
+    <h3 no-margin no-padding margin-top><b>{{ 'WHOOPS' | translate }}</b></h3>
+    <p no-margin no-padding margin-bottom>{{ 'NO_CONTACTS' | translate }}</p>
+    <button ion-button round color="secondary" (click)="navCtrl.parent.select(3)" [disabled]="!network.online()">{{ 'ADD_CONTACT' | translate }}</button>
+  </div>
+  <!-- Indicator when user has no conversations yet. -->
+  <div class="empty-list" *ngIf="user && user.contacts && !user.conversations && !user.groups" text-center>
+    <ion-icon name="md-mail-open"></ion-icon>
+    <h3 no-margin no-padding margin-top><b>{{ 'WHOOPS' | translate }}</b></h3>
+    <p no-margin no-padding margin-bottom>{{ 'NO_CONVERSATIONS' | translate }}</p>
+    <button ion-button round color="secondary" (click)="showCompose()" [disabled]="!network.online()">{{ 'NEW_CONVERSATION' | translate }}</button>
+  </div>
+  <!-- Groups - only show (numOfGroups), if the user have more groups, "MORE" button shows up where they can view all groups. -->
+  <ion-list *ngIf="groups && groups.length > 0">
+    <ion-list-header>
+      <b>{{ 'ACTIVE_GROUPS' | translate }}<span *ngIf="groups && groups.length > numOfGroups" tappable (click)="viewAllGroups()">{{ 'MORE' | translate }}</span></b>
+    </ion-list-header>
+    <ion-item *ngFor="let group of groups | recentGroups: [numOfGroups, null]" tappable (click)="viewGroup(group)">
+      <ion-avatar item-start>
+        <img-loader src="{{group.image}}" fallback="assets/images/group.png"></img-loader>
+      </ion-avatar>
+      <!-- Has unread messages -->
+      <div *ngIf="getUnreadGroupMessages(group) > 0">
+        <h2 float-left><b>{{group.name}}</b></h2>
+        <span float-right no-margin no-padding><b>{{group.messages[group.messages.length - 1].date | dateFormat}}</b></span>
+        <h3 float-left><b>{{getGroupLastMessage(group)}}</b></h3>
+        <ion-badge color="danger" float-right *ngIf="getUnreadGroupMessages(group) > 0">{{getUnreadGroupMessages(group)}}</ion-badge>
+      </div>
+      <!-- Has no unread messages -->
+      <div *ngIf="getUnreadGroupMessages(group) == 0">
+        <h2 float-left>{{group.name}}</h2>
+        <span float-right no-margin no-padding>{{group.messages[group.messages.length - 1].date | dateFormat}}</span>
+        <h3 float-left>{{getGroupLastMessage(group)}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+  <!-- Conversations - only show (numOfConversations), if the user have more conversations, "MORE" button shows up where they can view all conversations. -->
+  <ion-list *ngIf="conversations && conversations.length > 0">
+    <ion-list-header>
+      <b>{{ 'RECENT' | translate }}<span *ngIf="conversations && conversations.length > numOfConversations" tappable (click)="viewAllConversations()">{{ 'MORE' | translate }}</span></b>
+    </ion-list-header>
+    <ion-item *ngFor="let conversation of conversations | recentConversations: [numOfConversations, null]" tappable (click)="viewConversation(conversation)">
+      <ion-avatar item-start>
+        <div class="avatar">
+          <span [ngClass]="{'active': usersApi.getUser(conversation.partnerId).online}"></span>
+          <img-loader src="{{usersApi.getUser(conversation.partnerId).profilePic}}" *ngIf="usersApi.getUser(conversation.partnerId)"></img-loader>
+        </div>
+      </ion-avatar>
+      <!-- Has unread messages -->
+      <div *ngIf="getUnreadMessages(conversation) > 0">
+        <h2 *ngIf="usersApi.getUser(conversation.partnerId)" float-left><b>{{usersApi.getUser(conversation.partnerId).firstName}} {{usersApi.getUser(conversation.partnerId).lastName}}</b></h2>
+        <span float-right no-margin no-padding><b>{{conversation.messages[conversation.messages.length - 1].date | dateFormat}}</b></span>
+        <h3 float-left><b>{{getLastMessage(conversation)}}</b></h3>
+        <ion-badge color="danger" float-right *ngIf="getUnreadMessages(conversation) > 0">{{getUnreadMessages(conversation)}}</ion-badge>
+      </div>
+      <!-- Has no unread messages -->
+      <div *ngIf="getUnreadMessages(conversation) == 0">
+        <h2 *ngIf="usersApi.getUser(conversation.partnerId)" float-left>{{usersApi.getUser(conversation.partnerId).firstName}} {{usersApi.getUser(conversation.partnerId).lastName}}</h2>
+        <span float-right no-margin no-padding>{{conversation.messages[conversation.messages.length - 1].date | dateFormat}}</span>
+        <h3 float-left>{{getLastMessage(conversation)}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+  <!-- Button -->
+  <ion-fab right bottom *ngIf="user && user.contacts">
+    <button ion-fab color="secondary" (click)="showCompose()" [disabled]="!network.online()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

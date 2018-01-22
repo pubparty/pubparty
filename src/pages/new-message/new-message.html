@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button tappable (click)="back()">{{ 'CANCEL' | translate }}</button>
+    </ion-buttons>
+    <ion-title>{{ 'NEW_CONVERSATION' | translate }}</ion-title>
+    <!-- Disable the button if user has not added a user to start a chat with. -->
+    <ion-buttons end *ngIf="users">
+      <button ion-button tappable (click)="done()" [disabled]="!network.online() || users.length < 1">{{ 'DONE' | translate }}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Show user's contacts. -->
+  <ion-list *ngIf="contacts">
+    <ion-searchbar [(ngModel)]="searchUser" placeholder="{{ 'SEARCH' | translate }}"></ion-searchbar>
+    <ion-item tappable (click)="toggle(user)" *ngFor="let user of contacts | usersFilter: [[], searchUser]">
+      <ion-avatar item-start>
+        <div class="avatar" *ngIf="user">
+          <span [ngClass]="{'active': user.online}"></span>
+          <img-loader src="{{user.profilePic}}"></img-loader>
+        </div>
+      </ion-avatar>
+      <h2><b>{{user.firstName}} {{user.lastName}}</b></h2>
+      <h3>@{{user.userName}}</h3>
+      <ion-icon name="add-circle" item-end color="primary" *ngIf="network.online() && users.indexOf(user.userId) == -1" tappable (click)="add(user); $event.stopPropagation();"></ion-icon>
+      <ion-icon name="remove-circle" item-end color="danger" *ngIf="network.online() && users.indexOf(user.userId) > -1" tappable (click)="remove(user); $event.stopPropagation();"></ion-icon>
+    </ion-item>
+    <p text-center *ngIf="user.contacts && ((contacts | usersFilter:[[], searchUser])?.length < 1)">{{ 'NO_USERS_FOUND' | translate }}</p>
+  </ion-list>
+</ion-content>

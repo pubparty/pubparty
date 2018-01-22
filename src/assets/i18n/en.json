@@ -58,5 +58,177 @@
   "CONFIRM_LOGOUT_MESSAGE": "Are you sure you want to logout?",
   "CANCEL": "Cancel",
   "LOGOUT": "Logout",
-  "PROFILE_UPDATED_MESSAGE": "Your profile has been successfully updated."
+  "PROFILE_UPDATED_MESSAGE": "Your profile has been successfully updated.",
+  
+  "FAIL_INITIALIZE": "Unable to retrieve authentication data. Please connect to the internet.",
+  "SERVER_TIMEOUT": "A connection with the server could not be established. Please try again later.",
+  "RETRY": "Retry",
+  "SWIPE_TO_CONTINUE": "Swipe to Continue",
+  "APP_APP_AWAY": "App App and Away!",
+  "WELCOME_TO_JETPACK": "Welcome to FireLine",
+  "JETPACK_ULTIMATE": "FireLine is the Ultimate Ionic 3 Firebase Messenger",
+  "BEAUTIFULLY_CRAFTED": "Beautifully Crafted",
+  "QUALITY_TESTED": "Quality tested for today's modern app standards",
+  "LOTS_FEATURES": "Lots of Features",
+  "JUMPSTART_MODERN": "To jumpstart your messaging app requirements",
+  "BUILD_WITH_JETPACK": "Build with FireLine",
+  "LAUNCH_DREAMAPP": "Launch your messaging app today!",
+
+
+  "CONTINUE_WITH_TWITTER": "Continue with Twitter",
+  "SIGNUP_WITH_EMAIL": "Signup with Email",
+  "HAVE_ACCOUNT": "Have an account? Login",
+  "FORGOT_PASSWORD": "Forgot your password?",
+  "LOGIN_JETPACK": "Login to FireLine",
+  "JOIN_JETPACK": "Join FireLine",
+  "GOT_PASSWORD_LOGIN": "Got your password? Login",
+  "ENTER_EMAIL_RESET_PASSWORD": "Enter your email below, and let us help you reset your password",
+  "RESET_PASSWORD": "Reset Password",
+
+  "ENTER_PASSWORD": "Enter your password",
+  "PLEASE_ENTER_PASSWORD": "Please enter your password",
+  "REENTER_PASSWORD": "Re-enter your password",
+  "PASSWORD_INVALID": "Your password must be at least 4 characters",
+  "PLEASE_CONFIRM_PASSWORD": "Please confirm your password",
+  "PASSWORD_DO_NOT_MATCH": "Your passwords do not match",
+  "AGREE_TERMS_PRIVACY": "By joining you agree to our Terms & Privacy Policy",
+
+  "OFFLINE": "Your internet connection appears to be offline.",
+
+  "PASSWORD_RESET_SENT": "A password reset email has been sent to your email.",
+  "VERIFICATION_SENT": "An email verification has been sent to your email.",
+  "VERIFICATION_FAILED": "An error occured while sending your email verification.",
+  "EMAIL_VERIFIED": "Email Verified!",
+  "VERIFIED_MESSAGE": "Thank you for verifying your email address.",
+
+  "THANK_YOU_REGISTERING": "Thank you for registering",
+  "EMAIL_CONFIRMATION_SENT": "An email confirmation has been sent to:",
+  "EMAIL_CONFIRMATION_SENT_ONCE_ONLINE": "An email confirmation will be sent to your email once you go online.",
+  "ONCE_VERIFIED": "Once you've verified your account, you'll be able to start and enjoy FireLine",
+  "RESEND_VERIFICATION": "Resend Verification",
+
+  "SETTINGS": "SETTINGS",
+  "SET_LANGUAGE": "Change Language",
+  "ENGLISH": "English",
+  "SPANISH": "Spanish",
+  "OK": "Ok",
+  "DONE": "Done",
+
+
+  "BACK": "Back",
+  "ENTER_FIRST_NAME": "Enter your first name",
+
+  "SET_PROFILE_PICTURE": "Set Profile Picture",
+  "TAKE_A_PHOTO": "Take a Photo",
+  "CHOOSE_FROM_GALLERY": "Choose from Gallery",
+  "PROFILE_UPDATED": "Profile Updated!",
+  "UPLOAD_PICTURE_ERROR": "Sorry, an error occured uploading the picture.",
+
+  "SEND_PUSH_NOTIFICATION": "Send Push Notification",
+  "NOT_AVAILABLE": "Not Available",
+  "AVAILABLE": "Available",
+  "HAS_SENT_PUSH_NOTIFICATION": "has sent you a push notification",
+  "PUSH_NOTIFICATION_SENT": "Your push notification has been successfully sent.",
+  "PUSH_NOTIFICATION_ERROR": "Sorry, an error occured sending your push notification.",
+
+
+
+  "ENTER_USER_NAME": "Enter your user name",
+  "PLEASE_ENTER_USER_NAME": "Please enter your user name",
+  "PLEASE_ENTER_VALID_USER_NAME": "Username must only contain characters and numbers and should be 4-20 characters long",
+  "USER_NAME_IN_USE": "Username is already taken",
+
+  "SEARCH": "Search",
+  "YOUR_CONTACTS": "Your Contacts",
+  "CONTACT_REQUESTS": "Contact Requests",
+  "APPROVE_IGNORE_REQUESTS": "Approve or ignore requests",
+  "CANCEL_PENDING_REQUESTS": "Cancel pending requests",
+  "CONTACTS": "Contacts",
+  "CONTACT": "Contact",
+  "NO_CONTACTS": "You have no contacts yet.",
+  "ADD_CONTACT": "Discover People",
+  "NO_USERS_FOUND": "No users found.",
+  "RECEIVED": "Received",
+  "SENT": "Sent",
+
+  "YOU_ARE_NOT_CONNECTED": "You are not connected yet.",
+  "SEND_REQUEST_BUTTON": "Send Request",
+  "REQUEST_IS_PENDING": "Your request is pending.",
+  "CANCEL_REQUEST_BUTTON": "Cancel Request",
+  "REQUESTS_TO_CONNECT": "Requests to connect with you.",
+  "YOU_ARE_CONNECTED": "You are already connected.",
+  "SEND_MESSAGE_BUTTON": "Send Message",
+
+  "SEND_REQUEST_QUESTION": "Send them a contact request?",
+  "SEND": "Send",
+  "SENT_REQUEST": "has been requested to be your contact.",
+
+  "CANCEL_REQUEST_QUESTION": "Cancel your contact request?",
+  "CANCELLED_REQUEST": "has been cancelled to be a contact.",
+
+  "ACCEPT_REQUEST_QUESTION": "Accept their contact request?",
+  "ACCEPT": "Accept",
+  "ACCEPTED_REQUEST": "has been added to your contacts.",
+
+  "REJECT_REQUEST_QUESTION": "Ignore their contact request?",
+  "REJECT": "Ignore",
+  "REJECTED_REQUEST": "has been ignored.",
+
+  "UPDATE_PROFILE_SMALL": "Update profile",
+  "SIGN_OUT": "Sign out",
+
+  "SEND_PHOTO": "Send Photo",
+
+  "ADD_MEMBERS": "Add Members",
+  "MEMBER_ADDED_GROUP": " has been added to the group.",
+  "MEMBERS_ADDED_GROUP": "Members have been added to the group.",
+
+  "WRITE_MESSAGE": "Write a message...",
+  "CONFIRM_DELETE_MESSAGE?": "Delete Message?",
+  "CONFIRM_DELETE_MESSAGE_QUESTION": "Are you sure you want to delete this message?",
+  "DELETE": "Delete",
+  "MESSAGE_DELETED": "Message has been successfully deleted.",
+
+  "YOUR_CONVERSATIONS": "Your Conversations",
+  "YOUR_GROUPS": "Your Groups",
+  "YOUR_MESSAGES": "Your Messages",
+
+  "YOU": "You: ",
+  "YOU_SENT_PHOTO_MESSAGE": "You sent a photo message.",
+  "SENT_PHOTO_MESSAGE": "sent a photo message.",
+
+  "WHOOPS": "Whoops!",
+  "NO_CONVERSATIONS": "You have not started any conversations yet.",
+  "NEW_CONVERSATION": "New Conversation",
+  "ACTIVE_GROUPS": "Active Groups",
+  "RECENT": "Recent",
+  "MORE": "More",
+
+  "CONTACTS_OF": "Contacts of",
+  "STARTED": "Started",
+  "MEMBERS": "MEMBERS",
+  "MEMBER": "MEMBER",
+  "LEAVE_GROUP": "Leave Group",
+  "DELETE_GROUP": "Delete Group",
+
+  "CHANGE_GROUP_NAME": "Change Group Name",
+  "CHANGE_GROUP_NAME_TEXT": "Please enter a new group name",
+  "GROUP_NAME": "Group Name",
+  "SAVE": "Save",
+  "GROUP_NAME_UPDATED": "Group name has been successfully updated.",
+  "SET_GROUP_PICTURE" :"Set Group Picture",
+  "GROUP_IMAGE_UPDATED": "Group image has been successfully updated.",
+  "CONFIRM_LEAVE_GROUP": "Leave Group?",
+  "CONFIRM_LEAVE_GROUP_MESSAGE": "Are you sure you want to leave this group?",
+  "LEAVE": "Leave",
+  "GROUP_LEFT": "You have successfully left this group.",
+  "CONFIRM_DELETE_GROUP": "Delete Group?",
+  "CONFIRM_DELETE_GROUP_MESSAGE": "Are you sure you want to delete this group?",
+  "GROUP_DELETED": "You have successfully deleted this group.",
+
+  "PUSH_SENT_PHOTO": "has sent a photo.",
+  "PUSH_CONTACT_REQUEST": "has sent you a contact request.",
+  "PUSH_CONTACT_ACCEPTED": "has accepted your contact request."
+
+
 }

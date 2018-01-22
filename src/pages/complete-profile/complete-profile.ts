@@ -119,8 +119,13 @@ export class CompleteProfilePage {
         }
       }
       //Create user object based on User model.
-      this.user = new User(userId, '', firstName, lastName, profilePic, email, '', '', null, '', null, null);
+      // this.user = new User(userId, '', firstName, lastName, profilePic, email, '', '', null, '', null, null);
+      this.user = new User(userId, '', firstName, lastName, profilePic, email, '', '', null, '', null, null, null, null, null, null, null, null, null, null )
 
+
+
+
+      // this.user = new User(userId, '', firstName, lastName, profilePic, email, '', '', null, '', null, null)
       this.profileForm.setValue({
         userName: '',
         firstName: firstName,

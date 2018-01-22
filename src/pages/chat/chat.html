@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title *ngIf="!group">{{title}}</ion-title>
+    <ion-title *ngIf="group">{{groupsApi.getGroup(groupId).name}}</ion-title>
+    <ion-buttons end *ngIf="conversation">
+      <button ion-button (click)="viewProfile(users.get(members[1]))"><ion-icon name="md-more"></ion-icon></button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="group">
+      <button ion-button (click)="viewGroup(group)"><ion-icon name="md-more"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="messages">
+    <!-- Pull down to load more messages. -->
+    <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="messagesToShow <= messages.length" snapbackDuration="500" closeDuration="500">
+      <ion-refresher-content pullingIcon="none" refreshingSpinner="none" refreshingText=""></ion-refresher-content>
+    </ion-refresher>
+    <!-- Limit messages to show 10 at a time (numOfMessages). -->
+    <ion-row padding-top *ngFor="let message of messages | limitMessages : messagesToShow; let last = last;">
+      <!-- Sender -->
+      <ion-col col-1 *ngIf="isSender(message.sender)"></ion-col>
+      <ion-col col-9 class="message right" *ngIf="isSender(message.sender)" (press)="onPress(message)">
+        <!-- Text Message (long tap to delete) -->
+        <div *ngIf="message.type == 'text'">
+          <p word-wrap no-margin float-right>{{ message.text }}</p>
+          <div class="float-break"></div>
+        </div>
+        <!-- Photo Message (long tap to delete) -->
+        <img-loader no-margin *ngIf="message.type =='image'" src="{{message.url}}" fallback="assets/images/group.png" tappable (click)="viewImage(message.url)" (press)="onPress(message)"></img-loader>
+        <ion-badge float-right>{{ message.date | dateFormat }}
+          <span float-right *ngIf="last && isSeen() && conversationId">Seen</span>
+          <span float-right *ngIf="last && isSeen() && groupId && membersSeen < group.members.length - 1">Seen by {{membersSeen}}</span>
+          <span float-right *ngIf="last && isSeen() && groupId && membersSeen == group.members.length - 1">Seen by all</span>
+        </ion-badge>
+      </ion-col>
+      <ion-col col-2 class="avatar" text-center *ngIf="isSender(message.sender)">
+        <span [ngClass]="{'active': usersApi.getUser(message.sender).online}"></span>
+        <img-loader src="{{usersApi.getUser(message.sender).profilePic}}" (load)="doScroll()"></img-loader>
+      </ion-col>
+      <!-- Receiver -->
+      <ion-col class="avatar" col-2 text-center *ngIf="!isSender(message.sender)">
+        <span [ngClass]="{'active': usersApi.getUser(message.sender).online}"></span>
+        <img-loader src="{{usersApi.getUser(message.sender).profilePic}}" (load)="doScroll()" tappable (click)="viewProfile(usersApi.getUser(message.sender))"></img-loader>
+      </ion-col>
+      <ion-col class="message" col-9 *ngIf="!isSender(message.sender)">
+        <!-- Text Message (long tap to delete) -->
+        <div *ngIf="message.type == 'text'">
+          <p word-wrap no-margin><span *ngIf="group">{{ usersApi.getUser(message.sender).firstName }}: </span>{{ message.text }}</p>
+          <div class="float-break"></div>
+        </div>
+        <!-- Photo Message (long tap to delete) -->
+        <img-loader no-margin *ngIf="message.type =='image'" src="{{message.url}}" fallback="assets/images/group.png" tappable (click)="viewImage(message.url)" (press)="onPress(message)"></img-loader>
+        <ion-badge float-left>{{ message.date | dateFormat }}</ion-badge>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ion-footer primary>
+  <div class="bubble" text-center>
+    <span *ngIf="isTyping() && conversationId"><b>{{getPartner().firstName}}</b> is typing a message ...</span>
+    <span *ngIf="groupId && usersTyping && usersTyping.length == 1"><b>{{usersTyping[0].firstName}}</b> is typing a message ...</span>
+    <span *ngIf="groupId && usersTyping && usersTyping.length > 1"><b>{{usersTyping.length}} people</b> are typing a message ...</span>
+  </div>
+  <ion-row>
+    <!-- Send Photo -->
+    <ion-col col-2>
+      <button ion-button small clear (click)="sendPhoto()" [disabled]="!network.online()"><ion-icon name="md-image"></ion-icon></button>
+    </ion-col>
+    <!-- Message Box -->
+    <ion-col col-8>
+      <ion-textarea type="text" [placeholder]="translate.get('WRITE_MESSAGE')" [(ngModel)]="message" (keydown)="keyDownFunction($event)" (ionFocus)="scrollBottom()" fz-elastic rows="1"></ion-textarea>
+    </ion-col>
+    <!-- Send -->
+    <ion-col col-2>
+      <button ion-button small clear (click)="send()" [disabled]="!network.online()"><ion-icon name="md-send"></ion-icon></button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

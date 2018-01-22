@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons start>
+      <button ion-button tappable (click)="back()">{{ 'BACK' | translate }}</button>
+    </ion-buttons>
+    <ion-title>{{ 'YOUR_GROUPS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="groups && groups.length > 0">
+    <ion-searchbar [(ngModel)]="searchGroup" placeholder="{{ 'SEARCH' | translate }}"></ion-searchbar>
+    <ion-item *ngFor="let group of groups | recentGroups: [groups.length, searchGroup]" tappable (click)="viewGroup(group)">
+      <ion-avatar item-start>
+        <img-loader src="{{group.image}}" fallback="assets/images/group.png"></img-loader>
+      </ion-avatar>
+      <!-- Has unread messages -->
+      <div *ngIf="getUnreadGroupMessages(group) > 0">
+        <h2 float-left><b>{{group.name}}</b></h2>
+        <span float-right no-margin no-padding><b>{{group.messages[group.messages.length - 1].date | dateFormat}}</b></span>
+        <h3 float-left><b>{{getGroupLastMessage(group)}}</b></h3>
+        <ion-badge color="danger" float-right *ngIf="getUnreadGroupMessages(group) > 0">{{getUnreadGroupMessages(group)}}</ion-badge>
+      </div>
+      <!-- Has no unread messages -->
+      <div *ngIf="getUnreadGroupMessages(group) == 0">
+        <h2 float-left>{{group.name}}</h2>
+        <span float-right no-margin no-padding>{{group.messages[group.messages.length - 1].date | dateFormat}}</span>
+        <h3 float-left>{{getGroupLastMessage(group)}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+  <!-- Button -->
+  <ion-fab right bottom *ngIf="user && user.contacts">
+    <button ion-fab color="secondary" (click)="showCompose()" [disabled]="!network.online()"><ion-icon name="md-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
