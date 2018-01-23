@@ -13,6 +13,7 @@ export class StorageProvider {
   private profilePicOptions: CameraOptions;
   private eventPicOptions: CameraOptions;
 
+  //add commit
   constructor(private camera: Camera,
     private file: File,
     private loading: LoadingProvider,
