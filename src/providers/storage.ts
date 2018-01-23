@@ -39,26 +39,13 @@ export class StorageProvider {
     };
   }
 
-  uriToBlob(fileURI): Promise<Blob> {
+  uriToBlob(fileURI): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      var byteString;
-      if (fileURI.split(',')[0].indexOf('base64') >= 0)
-          byteString = atob(fileURI.split(',')[1]);
-      else
-          byteString = unescape(fileURI.split(',')[1]);
-
-       // separate out the mime component
-    var mimeString = fileURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-     let blob = new Blob([ia], {type:mimeString});
-     return resolve(blob)
-    // return new Blob([ia], {type:mimeString});
+      fileURI = 'data:image/jpeg;base64,' + fileURI;
+      return resolve(fileURI);
+    
+    })
     //   this.file.resolveLocalFilesystemUrl(fileURI).then((fileEntry: Entry) => {
     //     fileEntry.getParent((directoryEntry: Entry) => {
     //       this.file.readAsArrayBuffer(directoryEntry.nativeURL, fileEntry.name)
@@ -68,17 +55,58 @@ export class StorageProvider {
     //           let blob = new Blob([buffer]);
     //           resolve(blob);
     //         }).catch((error) => {
-    //           console.error("Error creating File array buffer: " + JSON.stringify(error));
+    //           console.log(error.message, "message one")
+    //           // console.error("Error creating File array buffer: " + JSON.stringify(error));
     //           reject(error);
     //         });
     //     });
     //   }).catch((error) => {
-    //     console.log(error.message, "message")
+    //     console.log(error.message, "message two");
     //     // console.error("Error retrieving File URI: " + JSON.stringify(error));
-    //     // reject(error);
+    //     reject(error);
     //   });
-    });
+    // });
   }
+  // uriToBlob(fileURI): Promise<Blob> {
+  //   return new Promise((resolve, reject) => {
+
+  //     var byteString;
+  //     if (fileURI.split(',')[0].indexOf('base64') >= 0)
+  //         byteString = atob(fileURI.split(',')[1]);
+  //     else
+  //         byteString = unescape(fileURI.split(',')[1]);
+
+  //      // separate out the mime component
+  //   var mimeString = fileURI.split(',')[0].split(':')[1].split(';')[0];
+
+  //   // write the bytes of the string to a typed array
+  //   var ia = new Uint8Array(byteString.length);
+  //   for (var i = 0; i < byteString.length; i++) {
+  //       ia[i] = byteString.charCodeAt(i);
+  //   }
+  //    let blob = new Blob([ia], {type:mimeString});
+  //    return resolve(blob)
+  //   // return new Blob([ia], {type:mimeString});
+  //   //   this.file.resolveLocalFilesystemUrl(fileURI).then((fileEntry: Entry) => {
+  //   //     fileEntry.getParent((directoryEntry: Entry) => {
+  //   //       this.file.readAsArrayBuffer(directoryEntry.nativeURL, fileEntry.name)
+  //   //         .then((data: ArrayBuffer) => {
+  //   //           var uint8Array = new Uint8Array(data);
+  //   //           var buffer = uint8Array.buffer;
+  //   //           let blob = new Blob([buffer]);
+  //   //           resolve(blob);
+  //   //         }).catch((error) => {
+  //   //           console.error("Error creating File array buffer: " + JSON.stringify(error));
+  //   //           reject(error);
+  //   //         });
+  //   //     });
+  //   //   }).catch((error) => {
+  //   //     console.log(error.message, "message")
+  //   //     // console.error("Error retrieving File URI: " + JSON.stringify(error));
+  //   //     // reject(error);
+  //   //   });
+  //   });
+  // }
 
   deleteProfilePic(userId, url): Promise<any> {
     return new Promise((resolve) => {
@@ -103,20 +131,20 @@ export class StorageProvider {
         //Add unique datestring to fileName to make all uploaded files unique and not override.
         fileName = this.processFileName(fileName);
         this.uriToBlob(fileURI).then(fileBlob => {
-          let metadata = {
-            'contentType': fileBlob.type
-          };
-          firebase.storage().ref().child('images/' + userId + '/' + fileName).put(fileBlob, metadata).then(snapshot => {
+          console.log(fileBlob, "fileBlob");
+          firebase.storage().ref().child('images/' + userId + '/' + fileName).putString(fileBlob, `data_url`).then(snapshot => {
             let fileURL = snapshot.metadata.downloadURLs[0];
             this.loading.hide();
             resolve(fileURL);
           }).catch((error) => {
             this.loading.hide();
-            this.toast.showWithDuration(this.translate.get('UPLOAD_PICTURE_ERROR'), ToastConfig.duration);
+            console.log(error.message)
+            // this.toast.showWithDuration(this.translate.get('UPLOAD_PICTURE_ERROR'), ToastConfig.duration);
           });
         }).catch((error) => {
           this.loading.hide();
-          this.toast.showWithDuration(this.translate.get('UPLOAD_PICTURE_ERROR'), ToastConfig.duration);
+          console.log(error.message)
+          // this.toast.showWithDuration(this.translate.get('UPLOAD_PICTURE_ERROR'), ToastConfig.duration);
         });
       }).catch((error) => {
         this.loading.hide();
@@ -135,10 +163,8 @@ export class StorageProvider {
         //Add unique datestring to fileName to make all uploaded files unique and not override.
         fileName = this.processFileName(fileName);
         this.uriToBlob(fileURI).then(fileBlob => {
-          let metadata = {
-            'contentType': fileBlob.type
-          };
-          firebase.storage().ref().child('images/' + userId + '/' + fileName).put(fileBlob, metadata).then(snapshot => {
+
+          firebase.storage().ref().child('images/' + userId + '/' + fileName).putString(fileBlob, `data_url`).then(snapshot => {
             let fileURL = snapshot.metadata.downloadURLs[0];
             this.loading.hide();
             resolve(fileURL);
