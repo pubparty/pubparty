@@ -93,6 +93,7 @@ export class UpdateProfilePage {
     this.loading.show();
     this.user.firstName = this.profileForm.value['firstName'];
     this.user.lastName = this.profileForm.value['lastName'];
+    this.user.email = this.profileForm.value['email'];
     this.user.number = this.profileForm.value['number'];
     this.user.about = this.profileForm.value['about'];
     this.database.setUser(this.user).then(() => {
