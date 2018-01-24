@@ -127,12 +127,13 @@ export class StorageProvider {
       this.camera.getPicture(this.profilePicOptions).then(fileURI => {
         this.loading.show();
         // console.log(fileURI);
-        let fileName = JSON.stringify(fileURI).substr(JSON.stringify(fileURI).lastIndexOf('/') + 1);
-        fileName = fileName.substr(0, fileName.length - 1);
+        // let fileName = JSON.stringify(fileURI).substr(JSON.stringify(fileURI).lastIndexOf('/') + 1);
+        // fileName = fileName.substr(0, fileName.length - 1);
+        let fileName = "profilePic";
         //Add unique datestring to fileName to make all uploaded files unique and not override.
-        fileName = this.processFileName(fileName);
+        // fileName = this.processFileName(fileName);
         this.uriToBlob(fileURI).then(fileBlob => {
-          console.log(fileBlob, "fileBlob");
+          
           firebase.storage().ref().child('images/' + userId + '/' + fileName).putString(fileBlob, `data_url`).then(snapshot => {
             let fileURL = snapshot.metadata.downloadURLs[0];
             this.loading.hide();

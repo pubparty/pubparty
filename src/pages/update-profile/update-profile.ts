@@ -111,10 +111,12 @@ export class UpdateProfilePage {
           text: 'Take a Photo',
           role: 'destructive',
           handler: () => {
-            this.storage.uploadProfilePic(this.user.userId, this.camera.PictureSourceType.CAMERA).then(profilePic => {
-              this.storage.deleteProfilePic(this.user.userId, this.user.profilePic).then(() => {
-                this.user.profilePic = profilePic;
-              });
+            this.storage.uploadProfilePic(this.user.userId, this.camera.PictureSourceType.CAMERA)
+            .then(profilePic => {
+              this.user.profilePic = profilePic;
+              // this.storage.deleteProfilePic(this.user.userId, this.user.profilePic).then(() => {
+                
+              // });
             });
           }
         },
@@ -122,9 +124,10 @@ export class UpdateProfilePage {
           text: 'Choose from Gallery',
           handler: () => {
             this.storage.uploadProfilePic(this.user.userId, this.camera.PictureSourceType.PHOTOLIBRARY).then(profilePic => {
-              this.storage.deleteProfilePic(this.user.userId, this.user.profilePic).then(() => {
-                this.user.profilePic = profilePic;
-              });
+              this.user.profilePic = profilePic;
+              // this.storage.deleteProfilePic(this.user.userId, this.user.profilePic).then(() => {
+                
+              // });
             });
           }
         },
